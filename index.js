@@ -10,35 +10,35 @@ const wss = new WebSocket.Server({ server });
 // Maintain a list of connected clients
 const clients = [];
 
-wss.on('connection', (socket) => {
-  console.log('A new client connected');
+// wss.on('connection', (socket) => {
+//   console.log('A new client connected');
 
-  // Add the client to the list
-  clients.push(socket);
+//   // Add the client to the list
+//   clients.push(socket);
 
-  socket.on('message', (message) => {
-    console.log(`Received message: ${message}`);
+//   socket.on('message', (message) => {
+//     console.log(`Received message: ${message}`);
 
-    // Broadcast the message to all connected clients
-    clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        const data = { message };
-        console.log(`broadcasting...`, data);
-        client.send(JSON.stringify(data));
-      }
-    });
-  });
+//     // Broadcast the message to all connected clients
+//     clients.forEach((client) => {
+//       if (client.readyState === WebSocket.OPEN) {
+//         const data = { message };
+//         console.log(`broadcasting...`, data);
+//         client.send(JSON.stringify(data));
+//       }
+//     });
+//   });
 
-  socket.on('close', () => {
-    console.log('Client disconnected');
+//   socket.on('close', () => {
+//     console.log('Client disconnected');
 
-    // Remove the client from the list
-    const index = clients.indexOf(socket);
-    if (index !== -1) {
-      clients.splice(index, 1);
-    }
-  });
-});
+//     // Remove the client from the list
+//     const index = clients.indexOf(socket);
+//     if (index !== -1) {
+//       clients.splice(index, 1);
+//     }
+//   });
+// });
 
 app.get('/', (req, res) => {
   res.send('ok');
